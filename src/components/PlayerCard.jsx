@@ -22,7 +22,7 @@ export function PlayerCard({ player, onDelete, rank }) {
       <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105">
         <div className="relative">
           <img
-            src={player.imageUrl}
+            src={player.image_url}
             alt={player.name}
             className="w-full h-48 object-cover"
           />
@@ -48,9 +48,9 @@ export function PlayerCard({ player, onDelete, rank }) {
           <PlayerStats
             goals={player.goals}
             assists={player.assists}
-            mvpPoints={player.mvpPoints}
-            yellowCards={player.yellowCards}
-            redCards={player.redCards}
+            mvpPoints={player.mvps}
+            yellowCards={player.yellow_cards}
+            redCards={player.red_cards}
           />
 
           <button
