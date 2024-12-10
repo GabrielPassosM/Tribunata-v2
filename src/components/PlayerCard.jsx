@@ -37,7 +37,7 @@ export function PlayerCard({ player, onDelete, rank }) {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-gray-600">
               <Hash className="w-4 h-4" />
-              <span>{player.number}</span>
+              <span>{player.shirt_number}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Activity className="w-4 h-4" />

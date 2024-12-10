@@ -35,9 +35,9 @@ function App() {
           ...player,
           goals: player.goals + stats.goals,
           assists: player.assists + stats.assists,
-          mvpPoints: player.mvpPoints + stats.mvpPoints,
-          yellowCards: player.yellowCards + stats.yellowCards,
-          redCards: player.redCards + stats.redCards,
+          mvps: player.mvps + stats.mvpPoints,
+          yellow_cards: player.yellow_cards + stats.yellowCards,
+          red_cards: player.red_cards + stats.redCards,
         };
       }
       return player;

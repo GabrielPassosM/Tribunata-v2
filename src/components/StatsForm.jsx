@@ -61,7 +61,7 @@ export function StatsForm({ players, onUpdateStats }) {
             <option value="">Selecione o jogador</option>
             {players.map(player => (
               <option key={player.id} value={player.id}>
-                {player.name} (#{player.number})
+                {player.name} (#{player.shirt_number})
               </option>
             ))}
           </select>

@@ -21,13 +21,13 @@ export function PlayerForm({ onAddPlayer }) {
       id: crypto.randomUUID(),
       name: formData.name,
       position: formData.position,
-      number: parseInt(formData.number),
-      imageUrl: formData.imageUrl || `https://source.unsplash.com/300x300/?soccer,player`,
+      shirt_number: parseInt(formData.number),
+      image_url: formData.imageUrl,
       goals: parseInt(formData.goals),
       assists: parseInt(formData.assists),
-      mvpPoints: parseInt(formData.mvpPoints),
-      yellowCards: parseInt(formData.yellowCards),
-      redCards: parseInt(formData.redCards),
+      mvps: parseInt(formData.mvpPoints),
+      yellow_cards: parseInt(formData.yellowCards),
+      red_cards: parseInt(formData.redCards),
     };
     onAddPlayer(player);
     setFormData({

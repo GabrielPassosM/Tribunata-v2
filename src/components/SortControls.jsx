@@ -13,9 +13,9 @@ export function SortControls({ onSortChange, currentSort }) {
         <option value="none">Sem classificação</option>
         <option value="goals">Gols</option>
         <option value="assists">Assistências</option>
-        <option value="mvpPoints">Pontos MVP</option>
-        <option value="yellowCards">Cartões Amarelos</option>
-        <option value="redCards">Cartões Vermelhos</option>
+        <option value="mvps">Pontos MVP</option>
+        <option value="yellow_cards">Cartões Amarelos</option>
+        <option value="red_cards">Cartões Vermelhos</option>
       </select>
     </div>
   );
@@ -23,5 +23,5 @@ export function SortControls({ onSortChange, currentSort }) {
 
 SortControls.propTypes = {
   onSortChange: PropTypes.func.isRequired,
-  currentSort: PropTypes.oneOf(['none', 'goals', 'assists', 'mvpPoints', 'yellowCards', 'redCards']).isRequired
+  currentSort: PropTypes.oneOf(['none', 'goals', 'assists', 'mvps', 'yellow_cards', 'red_cards']).isRequired
 };
