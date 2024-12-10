@@ -9,10 +9,10 @@ export function PlayerCard({ player, onDelete, rank }) {
 
   const getPositionInPortuguese = (position) => {
     const positions = {
-      'Goalkeeper': 'Goleiro',
-      'Defender': 'Defensor',
-      'Midfielder': 'Meio-campista',
-      'Forward': 'Atacante'
+      'goalkeeper': 'Goleiro',
+      'defender': 'Zagueiro',
+      'midfielder': 'Meio-campo',
+      'forward': 'Atacante'
     };
     return positions[position] || position;
   };
