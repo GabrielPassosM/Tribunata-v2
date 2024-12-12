@@ -24,14 +24,15 @@ export const apiFetchPlayers = async () => {
 export const apiDeletePlayer = async (playerId) => {
   try {
     const response = await axios.delete(`${apiUrl}/player/${playerId}`)
-    showSuccessModal({title: "Jogador deletado com sucesso"})
+    // showSuccessModal({title: "Jogador deletado com sucesso"})
     return response.data
   } catch(error) {
     let errorMsg = unexpectedErrorMsg
     if (error.status < 500) {
       errorMsg = error.response?.data?.detail ?? unexpectedErrorMsg
     }
-    showErrorModal({text: errorMsg})
+    // showErrorModal({text: errorMsg})
+    console.log(error)
   }
 }
 
