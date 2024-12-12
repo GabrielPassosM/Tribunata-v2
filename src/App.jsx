@@ -5,7 +5,7 @@ import { SortControls } from './components/SortControls';
 import { StatsForm } from './components/StatsForm';
 import { MenuSelector } from './components/MenuSelector';
 import { sortPlayers } from './utils/sortPlayers';
-import { apiFetchPlayers } from './apiService';
+import { apiFetchPlayers, apiCreatePlayer } from './apiService';
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -17,7 +17,8 @@ function App() {
       .then((data) => setPlayers(data))
   }, [])
 
-  const handleAddPlayer = (player) => {
+  const handleAddPlayer = async (playerInfo) => {
+    const player = await apiCreatePlayer(playerInfo)
     setPlayers(prev => [...prev, player]);
   };
 
