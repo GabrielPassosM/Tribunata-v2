@@ -22,7 +22,7 @@ export function PlayerForm({ onAddPlayer }) {
       name: formData.name,
       position: formData.position,
       shirt_number: parseInt(formData.number),
-      image_url: formData.imageUrl,
+      image_url: formData.imageUrl || "/images/avatar-player.png",
       goals: parseInt(formData.goals),
       assists: parseInt(formData.assists),
       mvps: parseInt(formData.mvpPoints),
