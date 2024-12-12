@@ -15,9 +15,6 @@ function App() {
   useEffect(() => {
     apiFetchPlayers()
       .then((data) => setPlayers(data))
-      .catch((error) => 
-        console.log(error)
-      )
   }, [])
 
   const handleAddPlayer = (player) => {
