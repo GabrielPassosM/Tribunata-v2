@@ -5,7 +5,7 @@ import { SortControls } from './components/SortControls';
 import { StatsForm } from './components/StatsForm';
 import { MenuSelector } from './components/MenuSelector';
 import { sortPlayers } from './utils/sortPlayers';
-import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer } from './apiService';
+import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats } from './apiService';
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -27,20 +27,13 @@ function App() {
     setPlayers(prev => prev.filter(player => player.id !== id));
   };
 
-  const handleUpdateStats = ({ playerId, stats }) => {
-    setPlayers(prev => prev.map(player => {
-      if (player.id === playerId) {
-        return {
-          ...player,
-          goals: player.goals + stats.goals,
-          assists: player.assists + stats.assists,
-          mvps: player.mvps + stats.mvpPoints,
-          yellow_cards: player.yellow_cards + stats.yellowCards,
-          red_cards: player.red_cards + stats.redCards,
-        };
-      }
-      return player;
-    }));
+  const handleUpdateStats = async ({ playerId, stats }) => {
+    const playerUpdated = await apiIncrementPlayerStats(playerId, stats)
+    setPlayers((prevPlayers) =>
+      prevPlayers.map((player) =>
+        player.id === playerUpdated.id ? playerUpdated : player
+      )
+    );
   };
 
   const sortedPlayers = sortPlayers(players, sortCategory);

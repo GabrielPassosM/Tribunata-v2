@@ -19,9 +19,9 @@ export function StatsForm({ players, onUpdateStats }) {
       stats: {
         goals: parseInt(formData.goals),
         assists: parseInt(formData.assists),
-        mvpPoints: parseInt(formData.mvpPoints),
-        yellowCards: parseInt(formData.yellowCards),
-        redCards: parseInt(formData.redCards),
+        mvps: parseInt(formData.mvpPoints),
+        yellow_cards: parseInt(formData.yellowCards),
+        red_cards: parseInt(formData.redCards),
       },
     });
     setFormData({
@@ -45,7 +45,7 @@ export function StatsForm({ players, onUpdateStats }) {
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
       <div className="flex items-center gap-2 mb-6">
         <LineChart className="w-6 h-6 text-blue-600" />
-        <h2 className="text-2xl font-bold text-gray-800">Atualizar Estatísticas</h2>
+        <h2 className="text-2xl font-bold text-gray-800">Adicionar Estatísticas</h2>
       </div>
       
       <div className="space-y-4">
@@ -69,7 +69,7 @@ export function StatsForm({ players, onUpdateStats }) {
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Gols</label>
+            <label className="block text-sm font-medium text-gray-700">{"Gols (+)"}</label>
             <input
               type="number"
               name="goals"
@@ -81,7 +81,7 @@ export function StatsForm({ players, onUpdateStats }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Assistências</label>
+            <label className="block text-sm font-medium text-gray-700">{"Assistências (+)"}</label>
             <input
               type="number"
               name="assists"
@@ -95,7 +95,7 @@ export function StatsForm({ players, onUpdateStats }) {
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Pontos MVP</label>
+            <label className="block text-sm font-medium text-gray-700">{"Pontos MVP (+)"}</label>
             <input
               type="number"
               name="mvpPoints"
@@ -107,7 +107,7 @@ export function StatsForm({ players, onUpdateStats }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Cartões Amarelos</label>
+            <label className="block text-sm font-medium text-gray-700">{"Cartões Amarelos (+)"}</label>
             <input
               type="number"
               name="yellowCards"
@@ -119,7 +119,7 @@ export function StatsForm({ players, onUpdateStats }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Cartões Vermelhos</label>
+            <label className="block text-sm font-medium text-gray-700">{"Cartões Vermelhos (+)"}</label>
             <input
               type="number"
               name="redCards"
@@ -135,7 +135,7 @@ export function StatsForm({ players, onUpdateStats }) {
           type="submit"
           className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
         >
-          Atualizar Estatísticas
+          Adicionar Estatísticas
         </button>
       </div>
     </form>

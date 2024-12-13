@@ -25,7 +25,7 @@ export function MenuSelector({ activeMenu, onMenuChange }) {
         }`}
       >
         <LineChart className="w-5 h-5" />
-        <span>Atualizar Estatísticas</span>
+        <span>Adicionar Estatísticas</span>
       </button>
     </div>
   );

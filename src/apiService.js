@@ -51,16 +51,16 @@ export const apiCreatePlayer = async (playerInfo) => {
   }
 }
 
-export const apiUpdatePlayer = async (playerInfo) => {
+export const apiIncrementPlayerStats = async (playerId, statsInfo) => {
   try {
-    const response = await axios.put(`${apiUrl}/player/${playerInfo.playerId}`, playerInfo)
-    showSuccessModal({title: "Jogador atualizado com sucesso"})
+    const response = await axios.put(`${apiUrl}/player/increment/${playerId}`, statsInfo)
+    // showSuccessModal({title: "Jogador atualizado com sucesso"})
     return response.data
   } catch(error) {
     let errorMsg = unexpectedErrorMsg
     if (error.status < 500) {
       errorMsg = error.response?.data?.detail ?? unexpectedErrorMsg
     }
-    showErrorModal({text: errorMsg})
+    // showErrorModal({text: errorMsg})
   }
 }
