@@ -4,6 +4,7 @@ import { PlayerGrid } from './components/PlayerGrid';
 import { SortControls } from './components/SortControls';
 import { StatsForm } from './components/StatsForm';
 import { MenuSelector } from './components/MenuSelector';
+import { FeedbackModal } from './components/FeedbackModal';
 import { sortPlayers } from './utils/sortPlayers';
 import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats } from './apiService';
 
@@ -11,29 +12,76 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [sortCategory, setSortCategory] = useState('none');
   const [activeMenu, setActiveMenu] = useState('add');
+  const [feedbackModal, setFeedbackModal] = useState({ isOpen: false, type: 'success', message: '' });
 
   useEffect(() => {
     apiFetchPlayers()
       .then((data) => setPlayers(data))
+      .catch((error) => {
+        setFeedbackModal({
+          isOpen: true,
+          type: 'error',
+          message: error.message
+        })
+      })
   }, [])
 
   const handleAddPlayer = async (playerInfo) => {
-    const player = await apiCreatePlayer(playerInfo)
-    setPlayers(prev => [...prev, player]);
+    try {
+      const player = await apiCreatePlayer(playerInfo)
+      setFeedbackModal({
+        isOpen: true,
+        type: 'success',
+        message: `Jogador ${player.name} adicionado com sucesso!`
+      })
+      setPlayers(prev => [...prev, player])
+    } catch(error) {
+      setFeedbackModal({
+        isOpen: true,
+        type: 'error',
+        message: error.message
+      })
+    }
   };
 
-  const handleDeletePlayer = async (id) => {
-    await apiDeletePlayer(id)
-    setPlayers(prev => prev.filter(player => player.id !== id));
+  const handleDeletePlayer = async (id, name) => {
+    try {
+      await apiDeletePlayer(id)
+      setFeedbackModal({
+        isOpen: true,
+        type: 'success',
+        message: `Jogador ${name} deletado com sucesso!`
+      })
+      setPlayers(prev => prev.filter(player => player.id !== id));
+    } catch(error) {
+      setFeedbackModal({
+        isOpen: true,
+        type: 'error',
+        message: error.message
+      })
+    }
   };
 
   const handleUpdateStats = async ({ playerId, stats }) => {
-    const playerUpdated = await apiIncrementPlayerStats(playerId, stats)
-    setPlayers((prevPlayers) =>
-      prevPlayers.map((player) =>
-        player.id === playerUpdated.id ? playerUpdated : player
+    try {
+      const playerUpdated = await apiIncrementPlayerStats(playerId, stats)
+      setFeedbackModal({
+        isOpen: true,
+        type: 'success',
+        message: `Estatísticas do jogador atualizadas com sucesso!`
+      })
+      setPlayers((prevPlayers) =>
+        prevPlayers.map((player) =>
+          player.id === playerUpdated.id ? playerUpdated : player
+        )
       )
-    );
+    } catch(error) {
+      setFeedbackModal({
+        isOpen: true,
+        type: 'error',
+        message: error.message
+      })
+    }
   };
 
   const sortedPlayers = sortPlayers(players, sortCategory);
@@ -81,6 +129,12 @@ function App() {
           </div>
         </div>
       </div>
+      <FeedbackModal
+        isOpen={feedbackModal.isOpen}
+        onClose={() => setFeedbackModal(prev => ({ ...prev, isOpen: false }))}
+        type={feedbackModal.type}
+        message={feedbackModal.message}
+      />
     </div>
   );
 }

@@ -66,7 +66,7 @@ export function PlayerCard({ player, onDelete, rank }) {
       <ConfirmationModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onConfirm={() => onDelete(player.id)}
+        onConfirm={() => onDelete(player.id, player.name)}
         playerName={player.name}
       />
     </>
