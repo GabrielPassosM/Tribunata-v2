@@ -78,13 +78,13 @@ PlayerCard.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     position: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-    imageUrl: PropTypes.string.isRequired,
+    shirt_number: PropTypes.number.isRequired,
+    image_url: PropTypes.string.isRequired,
     goals: PropTypes.number.isRequired,
     assists: PropTypes.number.isRequired,
-    mvpPoints: PropTypes.number.isRequired,
-    yellowCards: PropTypes.number.isRequired,
-    redCards: PropTypes.number.isRequired
+    mvps: PropTypes.number.isRequired,
+    yellow_cards: PropTypes.number.isRequired,
+    red_cards: PropTypes.number.isRequired
   }).isRequired,
   onDelete: PropTypes.func.isRequired,
   rank: PropTypes.number
