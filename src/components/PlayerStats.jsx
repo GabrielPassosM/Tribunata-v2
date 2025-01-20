@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Trophy, Goal, Award, AlertTriangle, AlertOctagon } from 'lucide-react';
+import { WandSparkles, Goal, Award, AlertTriangle, AlertOctagon } from 'lucide-react';
 
 export function PlayerStats({ goals, assists, mvpPoints, yellowCards, redCards }) {
   return (
@@ -10,12 +10,12 @@ export function PlayerStats({ goals, assists, mvpPoints, yellowCards, redCards }
         <span>Gols: {goals}</span>
       </div>
       <div className="flex items-center gap-2 text-gray-600">
-        <Trophy className="w-4 h-4 text-blue-600" />
+        <WandSparkles className="w-4 h-4 text-blue-600" />
         <span>Assistências: {assists}</span>
       </div>
       <div className="flex items-center gap-2 text-gray-600">
         <Award className="w-4 h-4 text-yellow-600" />
-        <span>MVP: {mvpPoints}</span>
+        <span>MVPs: {mvpPoints}</span>
       </div>
       <div className="flex items-center gap-2 text-gray-600">
         <AlertTriangle className="w-4 h-4 text-yellow-500" />
