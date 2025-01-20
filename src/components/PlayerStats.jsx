@@ -4,7 +4,7 @@ import { Trophy, Goal, Award, AlertTriangle, AlertOctagon } from 'lucide-react';
 
 export function PlayerStats({ goals, assists, mvpPoints, yellowCards, redCards }) {
   return (
-    <div className="grid grid-cols-2 gap-2 mt-4 border-t pt-4">
+    <div className="grid grid-cols-2 md:grid-cols-1 gap-2 mt-4 border-t pt-4">
       <div className="flex items-center gap-2 text-gray-600">
         <Goal className="w-4 h-4 text-green-600" />
         <span>Gols: {goals}</span>
