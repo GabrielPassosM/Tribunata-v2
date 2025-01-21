@@ -6,13 +6,48 @@ import { StatsForm } from './components/StatsForm';
 import { MenuSelector } from './components/MenuSelector';
 import { FeedbackModal } from './components/FeedbackModal';
 import { sortPlayers } from './utils/sortPlayers';
-import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats } from './apiService';
+import Loading from './components/Loading/Loading.jsx';
+import ErrorPage from "./components/ErrorPage";
+import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats, checkDatabaseStatus } from './apiService';
 
 function App() {
   const [players, setPlayers] = useState([]);
   const [sortCategory, setSortCategory] = useState('none');
   const [activeMenu, setActiveMenu] = useState('add');
   const [feedbackModal, setFeedbackModal] = useState({ isOpen: false, type: 'success', message: '' });
+  const [isDatabaseReady, setIsDatabaseReady] = useState(false);
+  const [maxDbRetriesExceeded, setMaxDbRetriesExceeded] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    let attempts = 0;
+
+    const maxRetries = import.meta.env.VITE_MAX_DB_RETRIES;
+    const retrySleepTime = import.meta.env.VITE_RETRY_SLEEP_TIME;
+  
+    const waitForDatabase = async () => {
+      while (isMounted && attempts < maxRetries) {
+        attempts++;
+        const status = await checkDatabaseStatus();
+        if (status === "ready") {
+          setIsDatabaseReady(true);
+          return;
+        } else {
+          await new Promise(resolve => setTimeout(resolve, retrySleepTime));
+        }
+      }
+
+      if (isMounted && attempts >= maxRetries) {
+        setMaxDbRetriesExceeded(true);
+      }
+    };
+  
+    waitForDatabase();
+  
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     apiFetchPlayers()
@@ -85,6 +120,13 @@ function App() {
   };
 
   const sortedPlayers = sortPlayers(players, sortCategory);
+
+  
+  if (maxDbRetriesExceeded) {
+    return <ErrorPage onRetry={() => window.location.reload()} />;
+  } else if (!isDatabaseReady) {
+    return <Loading />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">

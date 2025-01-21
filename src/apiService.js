@@ -56,3 +56,8 @@ export const apiIncrementPlayerStats = async (playerId, statsInfo) => {
     throw new Error(errorMsg)
   }
 }
+
+export const checkDatabaseStatus = async () => {
+  const response = await axios.get(`${apiUrl}/database-check`)
+  return response.data.status
+}
