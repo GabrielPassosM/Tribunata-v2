@@ -97,7 +97,7 @@ export function StatsForm({ players, onUpdateStats }) {
 
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">{"Pontos MVP (+)"}</label>
+            <label className="block text-sm font-medium text-gray-700">{"Pontos de MVP (+)"}</label>
             <input
               type="number"
               name="mvpPoints"
