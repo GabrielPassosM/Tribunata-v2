@@ -8,6 +8,8 @@ import { FeedbackModal } from './components/FeedbackModal';
 import { sortPlayers } from './utils/sortPlayers';
 import Loading from './components/Loading/Loading.jsx';
 import ErrorPage from "./components/ErrorPage";
+import { LoginModal } from './components/LoginModal';
+import { LogIn, LogOut } from 'lucide-react';
 import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats, checkDatabaseStatus } from './apiService';
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
   const [feedbackModal, setFeedbackModal] = useState({ isOpen: false, type: 'success', message: '' });
   const [isDatabaseReady, setIsDatabaseReady] = useState(false);
   const [maxDbRetriesExceeded, setMaxDbRetriesExceeded] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -60,6 +64,15 @@ function App() {
         })
       })
   }, [])
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsLoginModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   const handleAddPlayer = async (playerInfo) => {
     try {
@@ -131,11 +144,35 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-center gap-3 mb-8">
-          <img src='/images/tribulogo.png' alt='logo do site' style={{width: "6rem"}}/>
-          <h1 className="text-4xl font-bold text-gray-800 text-center">
-            Tribunata Team Manager
-          </h1>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <img src='/images/tribulogo.png' alt='logo do site' style={{width: "6rem"}}/>
+            <h1 className="text-4xl font-bold text-gray-800 text-center">
+              Tribunata Team Manager
+            </h1>
+          </div>
+          {user ? (
+            <div className="flex items-center gap-4">
+              <span className="text-gray-600">
+                Logado como <span className="font-medium">{user.email}</span>
+              </span>
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                <LogOut className="w-5 h-5" />
+                <span>Sair</span>
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setIsLoginModalOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+            >
+              <LogIn className="w-5 h-5" />
+              <span>Login</span>
+            </button>
+          )}
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -176,6 +213,12 @@ function App() {
         onClose={() => setFeedbackModal(prev => ({ ...prev, isOpen: false }))}
         type={feedbackModal.type}
         message={feedbackModal.message}
+      />
+
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLogin={handleLogin}
       />
     </div>
   );
