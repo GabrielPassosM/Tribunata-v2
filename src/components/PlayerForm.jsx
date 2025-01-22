@@ -102,12 +102,24 @@ export function PlayerForm({ onAddPlayer }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">URL da Imagem (opcional)</label>
+        <label className="block text-sm font-medium text-gray-700 flex items-center">
+          URL da imagem de perfil (opcional)
+          <span className="relative group ml-2">
+            <span className="flex items-center justify-center w-5 h-5 bg-gray-200 text-gray-700 rounded-full text-xs font-bold cursor-pointer">
+              i
+            </span>
+            <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-1 w-56 text-xs text-black bg-gray-200 rounded-md px-2 py-1 hidden group-hover:block">
+              <p>Link de onde está hospedada a imagem. Deve terminar em .jpg, .png, etc.</p>
+              <p>Recomendação de site para hospedar imagens grátis: postimages.org</p>
+            </span>
+          </span>
+        </label>
           <input
             type="url"
             name="imageUrl"
             value={formData.imageUrl}
             onChange={handleChange}
+            placeholder="https://exemplo.com/sua-imagem.jpg"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
           />
         </div>
