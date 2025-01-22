@@ -121,6 +121,7 @@ export function PlayerForm({ onAddPlayer }) {
               value={formData.goals}
               onChange={handleChange}
               min="0"
+              max="10000"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
             />
           </div>
@@ -133,6 +134,7 @@ export function PlayerForm({ onAddPlayer }) {
               value={formData.assists}
               onChange={handleChange}
               min="0"
+              max="10000"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
             />
           </div>
@@ -147,6 +149,7 @@ export function PlayerForm({ onAddPlayer }) {
               value={formData.mvpPoints}
               onChange={handleChange}
               min="0"
+              max="10000"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
             />
           </div>
@@ -159,6 +162,7 @@ export function PlayerForm({ onAddPlayer }) {
               value={formData.yellowCards}
               onChange={handleChange}
               min="0"
+              max="10000"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
             />
           </div>
@@ -171,6 +175,7 @@ export function PlayerForm({ onAddPlayer }) {
               value={formData.redCards}
               onChange={handleChange}
               min="0"
+              max="10000"
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
             />
           </div>
