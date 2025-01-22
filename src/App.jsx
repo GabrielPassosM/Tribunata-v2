@@ -144,8 +144,8 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center justify-center gap-3 mb-8">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-8">
+          <div className="flex-1 flex items-center justify-center gap-3 mb-8">
             <img src='/images/tribulogo.png' alt='logo do site' style={{width: "6rem"}}/>
             <h1 className="text-4xl font-bold text-gray-800 text-center">
               Tribunata Team Manager
