@@ -57,7 +57,20 @@ export const apiIncrementPlayerStats = async (playerId, statsInfo) => {
   }
 }
 
-export const checkDatabaseStatus = async () => {
+export const apiCheckDatabaseStatus = async () => {
   const response = await axios.get(`${apiUrl}/database-check`)
   return response.data.status
+}
+
+export const apiLoginUser = async (loginInfo) => {
+  try {
+    const response = await axios.post(`${apiUrl}/login`, loginInfo)
+    return response.data
+  } catch(error) {
+    let errorMsg = unexpectedErrorMsg
+    if (error.status < 500) {
+      errorMsg = error.response?.data?.detail ?? unexpectedErrorMsg
+    }
+    throw new Error(errorMsg)
+  }
 }

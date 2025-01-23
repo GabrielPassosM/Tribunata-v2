@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { X, User, Lock } from 'lucide-react';
+import { apiLoginUser } from '../apiService';
 
 export function LoginModal({ isOpen, onClose, onLogin }) {
   const [formData, setFormData] = useState({
@@ -14,16 +15,18 @@ export function LoginModal({ isOpen, onClose, onLogin }) {
     setIsLoading(true);
     
     try {
-      // TODO connect to backend
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      // TODO pass the user data retrieved to onLogin
-      onLogin({
+      const userData = await apiLoginUser({
         email: formData.email,
+        password: formData.password,
+      })
+      
+      onLogin({
+        email: userData.email,
+        id: userData.id,
       });
     } catch (error) {
-      console.error('Login failed:', error);
-      // TODO Handle login error
+      // TODO Display error better
+      alert(error.message)
     } finally {
       setIsLoading(false);
     }

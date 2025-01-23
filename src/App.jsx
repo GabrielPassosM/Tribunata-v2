@@ -10,7 +10,7 @@ import Loading from './components/Loading/Loading.jsx';
 import ErrorPage from "./components/ErrorPage";
 import { LoginModal } from './components/LoginModal';
 import { LogIn, LogOut } from 'lucide-react';
-import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats, checkDatabaseStatus } from './apiService';
+import { apiFetchPlayers, apiCreatePlayer, apiDeletePlayer, apiIncrementPlayerStats, apiCheckDatabaseStatus } from './apiService';
 
 function App() {
   const [players, setPlayers] = useState([]);
@@ -32,7 +32,7 @@ function App() {
     const waitForDatabase = async () => {
       while (isMounted && attempts < maxRetries) {
         attempts++;
-        const status = await checkDatabaseStatus();
+        const status = await apiCheckDatabaseStatus();
         if (status === "ready") {
           setIsDatabaseReady(true);
           return;
