@@ -18,9 +18,9 @@ export const apiFetchPlayers = async () => {
   }
 }
 
-export const apiDeletePlayer = async (playerId) => {
+export const apiDeletePlayer = async (deleteInfo) => {
   try {
-    const response = await axios.delete(`${apiUrl}/player/${playerId}`)
+    const response = await axios.delete(`${apiUrl}/player/${deleteInfo.id}/${deleteInfo.user_id}`)
     return response.data
   } catch(error) {
     let errorMsg = unexpectedErrorMsg

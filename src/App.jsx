@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { PlayerForm } from './components/PlayerForm';
 import { PlayerGrid } from './components/PlayerGrid';
 import { SortControls } from './components/SortControls';
@@ -76,6 +77,9 @@ function App() {
 
   const handleAddPlayer = async (playerInfo) => {
     try {
+      if (user) {
+        playerInfo["user_id"] = user.id
+      }
       const player = await apiCreatePlayer(playerInfo)
       setFeedbackModal({
         isOpen: true,
@@ -94,7 +98,12 @@ function App() {
 
   const handleDeletePlayer = async (id, name) => {
     try {
-      await apiDeletePlayer(id)
+      // TODO thats ugly
+      let deleteInfo = {id, user_id: uuidv4()}
+      if (user) {
+        deleteInfo["user_id"] = user.id
+      }
+      await apiDeletePlayer(deleteInfo)
       setFeedbackModal({
         isOpen: true,
         type: 'success',
@@ -112,6 +121,9 @@ function App() {
 
   const handleUpdateStats = async ({ playerId, stats }) => {
     try {
+      if (user) {
+        stats["user_id"] = user.id
+      }
       const playerUpdated = await apiIncrementPlayerStats(playerId, stats)
       setFeedbackModal({
         isOpen: true,
